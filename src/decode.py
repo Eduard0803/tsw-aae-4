@@ -17,7 +17,9 @@ class Decode:
         return n
     
     def decode_consoante(self, n):
-        if n not in Decode.__VOGAIS and n in Decode.__ALFABETO:
+        # a b c d e f g h i j k l m n o p q r s t u v w x y z
+        # z y x w v u t s r q p o n m l k j i h g f e d c b a
+        if n in Decode.__ALFABETO and n not in Decode.__VOGAIS :
             idx = len(Decode.__ALFABETO)-Decode.__ALFABETO.index(str(n))-1
             return Decode.__ALFABETO[idx]
         return n
@@ -30,20 +32,20 @@ class Decode:
         return n
 
     def remove_vogal_dupla(self, a, b):
-        if a in Decode.__VOGAIS and a == b:
-            return a
-        return a+b
+        pass
 
     def decode(self, message: str) -> str:
-        message.lower()
+        message = message.lower()
         out = ''
         for i in range(len(message)):
             buffer = ''
-            # buffer = self.remove_vogal_dupla(message[i], message[i+1])
-            # if message[i].isalpha():
-            #     buffer = self.decode_consoante(message[i])
-            if message[i].isdigit():
+            if i > 0:
+                buffer = self.remove_vogal_dupla(message[i], message[i-1])
+            if message[i].isalpha():
+                buffer = self.decode_consoante(message[i])
+            elif message[i].isdigit():
                 buffer = self.decode_numero(message[i])
-            buffer = self.decode_simbolo(message[i])
+            else:
+                buffer = self.decode_simbolo(message[i])
             out += buffer
         return out

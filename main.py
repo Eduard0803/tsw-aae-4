@@ -7,4 +7,5 @@ if __name__ == "__main__":
 
     message_decoded = decode.decode(message=message)
 
+    print(message)
     print(message_decoded)
