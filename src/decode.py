@@ -30,22 +30,27 @@ class Decode:
         if n in ['#', '^']:
             return ''
         return n
-
-    def remove_vogal_dupla(self, a, b):
-        pass
+    
+    def remove_vogal_dupla(self, message):
+        result = []
+        i = 0
+        while i < len(message):
+            if i + 1 < len(message) and message[i] == message[i + 1]:
+                result.append(message[i])
+                i += 2
+            else:
+                result.append(message[i])
+                i += 1
+        return ''.join(result)
 
     def decode(self, message: str) -> str:
-        message = message.lower()
+        message = self.remove_vogal_dupla(message.lower())
         out = ''
-        for i in range(len(message)):
-            buffer = ''
-            if i > 0:
-                buffer = self.remove_vogal_dupla(message[i], message[i-1])
-            if message[i].isalpha():
-                buffer = self.decode_consoante(message[i])
-            elif message[i].isdigit():
-                buffer = self.decode_numero(message[i])
+        for char in message:
+            if char.isalpha():
+                out += self.decode_consoante(char)
+            elif char.isdigit():
+                out += self.decode_numero(char)
             else:
-                buffer = self.decode_simbolo(message[i])
-            out += buffer
+                out += self.decode_simbolo(char)
         return out

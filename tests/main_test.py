@@ -36,13 +36,13 @@ def test_decode_consoante_CORRECT():
 
     assert message_decoded == "yxwutsqponmkjihgedcba"
 
-# def test_decode_vogal_dupla_CORRECT():
-#     decode = Decode()
+def test_decode_vogal_dupla_CORRECT():
+     decode = Decode()
 
-#     message = "aaeeiioouu"
+     message = "aaeeiioouu"
 
-#     message_decoded = decode.decode(message=message)
+     message_decoded = decode.decode(message=message)
 
-#     print(message_decoded)
+     print(message_decoded)
 
-#     assert message_decoded == "aeiou"
+     assert message_decoded == "aeiou"
